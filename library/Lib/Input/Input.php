@@ -29,7 +29,12 @@ class Input {
         return isset($_POST[$key]) ? self::clean($_POST[$key]) : $default;        
     }
     public static function get($key, $filter_array = 0, $default = NULL)
-    {	
+    {
+        if(filter_has_var(INPUT_GET, $key)) {
+            $item = filter_var($_GET['q'], FILTER_SANITIZE_STRING);
+            var_dump($item);
+        }
+        
         $item = isset($_GET[$key]) ? $_GET[$key] : NULL;
         if($filter_array === 0) {
             if(is_array($item))
