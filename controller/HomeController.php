@@ -1,5 +1,8 @@
 <?php
 use \Uri;
+use \Lib\String\Sanitizer;
+use \Lib\Cache\MemcacheDriver;
+use \Lib\Cache\MemcacheDriverException;
 
 class HomeController extends BaseController {
 
@@ -9,6 +12,23 @@ class HomeController extends BaseController {
 
     }
     public function index() {
+        try { 
+            $cache = new MemcacheDriver(array(
+                "host" => "127.0.0.1", 
+                "port" => "11211"
+            ));
+            /*
+            var_dump($cache->get('aaaa'));
+            $cache->set('aaaa', array("test"), 10);
+            var_dump($cache->get('aaaa'));
+            $cache->flush();
+            */
+
+        } catch(MemcacheDriverException $e) {
+            
+            echo $e->getXdebugMessage();
+        }
+
         $this->view->set(array(
             "title" => "Welcome to Como MVC", 
         ))->render();
