@@ -1,45 +1,58 @@
 <?php
+
 use \Uri;
 use \Lib\String\Sanitizer;
 use \Lib\Cache\MemcacheDriver;
 use \Lib\Cache\MemcacheDriverException;
 use \Lib\Input\Input;
+use \Model\Home;
+use \Lib\Response\Responder;
 
-class HomeController extends BaseController {
+class HomeController extends BaseController 
+{
 
-    public  function __construct() {
+    public  function __construct() 
+    {
 
         parent::__construct();	
 
     }
-    public function index() {
+    public function index() 
+    {       
+        $a = new Home();
+        $a->getProducts();
+
         echo "sanitize::rXssClean(): " . Sanitizer::xssClean('<script>aa</script>');
         echo "<br />";
         echo "Input::get(): " . Input::get('q', Input::FILTER_ARRAY);
         echo "<br />";
         echo "Input::get(Input::NO_FILTER_ARRAY): ";
-        var_dump(Input::get('q', Input::NO_FILTER_ARRAY));
         
         try { 
             $cache = new MemcacheDriver(array(
                 "host" => "127.0.0.1", 
                 "port" => "11211"
             ));
-            /*
-            var_dump($cache->get('aaaa'));
-            $cache->set('aaaa', array("test"), 10);
-            var_dump($cache->get('aaaa'));
-            $cache->flush();
-            */
-
-        } catch(MemcacheDriverException $e) {
-            
+        } catch(MemcacheDriverException $e) {          
             echo $e->getXdebugMessage();
         }
+
 
         $this->view->set(array(
             "title" => "Welcome to Como MVC", 
         ))->render();
+    }
+    public function a()
+    {
+        $responder = new Responder(array(
+            "title" => "Como MVC Framework for PHP"
+        ));
+
+        $responder->setPath('Common')->setPaglet('Header');
+        $responder->setPath('Home')->setPaglet('Body');
+        $responder->setPath('Common')->setPaglet('Footer');    
+        $responder->renderOutput();
+
     }
     public function test($arg1, $arg2) {
         echo $arg1 . "<br>";
