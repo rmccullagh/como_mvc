@@ -7,7 +7,7 @@ use \View;
 abstract class BaseController {
     public function __construct() {
 
-        $this->modelFactory = new ModelFactory();		
+        //$this->modelFactory = new ModelFactory();		
         $this->session      = new Session(Xml::getInstance());
 
         $this->session->start();
