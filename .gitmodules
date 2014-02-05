@@ -1,0 +1,6 @@
+[submodule "vendor/monolog"]
+	path = vendor/monolog
+	url = git@github.com:Seldaek/monolog.git
+[submodule "vendor/log"]
+	path = vendor/log
+	url = git@github.com:php-fig/log.git
