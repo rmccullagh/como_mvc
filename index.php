@@ -1,6 +1,8 @@
 <?php
 define('BASE_PATH', realpath(dirname(__FILE__)));
-define('VIEW_PATH', BASE_PATH . '/view/');
+
+define('VIEW_PATH', BASE_PATH . DIRECTORY_SEPARATOR . 'view');
+
 define('EXT', '.php');
 define('LOG_FILE', BASE_PATH.'/logs/');
 
