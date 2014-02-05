@@ -1,5 +1,4 @@
 <?php 
-use \Session;
 class Input {
  
  public static function ip()
