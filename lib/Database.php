@@ -14,10 +14,14 @@
  * License for the specific language governing permissions and limitations
  * under the License.
  */
+
+use \PDO;
+
 class Database
 {
     private static $_objInstance;
     private static $config;
+    private static $logger;
     private function __construct() {} 
     private function __clone() {} 
 
@@ -28,7 +32,7 @@ class Database
             $name		= self::$config->database['name'];
             $user		= self::$config->database['user'];
             $password 	        = self::$config->database['password'];
-
+                
             self::$_objInstance = new PDO('mysql:host=localhost;dbname='.$name, $user, $password); 
             self::$_objInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
             self::$_objInstance->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -36,8 +40,4 @@ class Database
         }
         return self::$_objInstance; 
     }
-	final public static function __callStatic( $chrMethod, $arrArguments ) { 
-  		$objInstance = self::getInstance(); 
-    		return call_user_func_array(array($objInstance, $chrMethod), $arrArguments); 
-  	}
 }
