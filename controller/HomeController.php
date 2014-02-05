@@ -3,6 +3,7 @@ use \Uri;
 use \Lib\String\Sanitizer;
 use \Lib\Cache\MemcacheDriver;
 use \Lib\Cache\MemcacheDriverException;
+use \Lib\Input\Input;
 
 class HomeController extends BaseController {
 
@@ -12,6 +13,13 @@ class HomeController extends BaseController {
 
     }
     public function index() {
+        echo "sanitize::rXssClean(): " . Sanitizer::xssClean('<script>aa</script>');
+        echo "<br />";
+        echo "Input::get(): " . Input::get('q', Input::FILTER_ARRAY);
+        echo "<br />";
+        echo "Input::get(Input::NO_FILTER_ARRAY): ";
+        var_dump(Input::get('q', Input::NO_FILTER_ARRAY));
+        
         try { 
             $cache = new MemcacheDriver(array(
                 "host" => "127.0.0.1", 
@@ -45,6 +53,9 @@ class HomeController extends BaseController {
     }
     public function test1() {
         echo __METHOD__;
+    }
+    public function redirect() {
+        Input::redirect("http://google.com");
     }
     public static function static_fn() {
         echo __METHOD__;
