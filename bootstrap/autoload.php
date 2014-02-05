@@ -18,6 +18,8 @@ SplClassLoader::autoRegister('Monolog', BASE_PATH . '/vendor/monolog/src');
 
 SplClassLoader::autoRegister('Psr', BASE_PATH .'/vendor/log');
 
+SplClassLoader::autoRegister('Lib', BASE_PATH.'/library/');
+
 SplClassLoader::autoRegister(NULL, BASE_PATH.'/lib');
 
 #require_once BASE_PATH . '/vendor/monolog/vendor/autoload.php';
