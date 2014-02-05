@@ -1,7 +1,10 @@
 como_mvc
 ========
 
-generic php mvc framework that uses Reflection, Namespaces, and Autoloading
+This is a generic MVC framework that uses Reflection, Namespaces, and Autoloading, Create controllers
+in the ./controller directory,  extend it from BaseController, created libraries in ./library/Lib/<namespace>/Class.php
+
+All controller methods can take arguments,  and they are validated on request.
 
 Install
 =======
