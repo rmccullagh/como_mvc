@@ -1,6 +1,7 @@
 <?php
 define('COMO_START', microtime(true));
-switch($_SERVER['COMO_ENV']) {
+$ENV = isset($_SERVER['COMO_ENV']) ? $_SERVER['COMO_ENV'] : 'DEV';
+switch($ENV) {
 	case 'DEV':
 		define('ENVIROMENT', 'development');
 	break;
